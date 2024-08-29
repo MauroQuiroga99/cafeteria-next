@@ -1,5 +1,5 @@
+import OrderSidebar from "@/components/order/OrderSidebar";
 import OrderSumary from "@/components/order/OrderSumary";
-import OrderSidebar from "@/components/OrderSidebar";
 
 export default function RootLayout({
   children,
