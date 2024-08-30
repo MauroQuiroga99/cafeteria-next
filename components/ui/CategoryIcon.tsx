@@ -19,8 +19,7 @@ const CategoryIcon = ({ category }: CategoryIconProps) => {
         />
       </div>
       <Link href={`/order/${category.slug}`} className="text-lg font-bold">
-        {" "}
-        {category.name}{" "}
+        {category.name}
       </Link>
     </div>
   );
