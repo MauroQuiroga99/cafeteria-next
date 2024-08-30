@@ -10,7 +10,7 @@ const initialState: xState = {
 };
 
 const orderSlice = createSlice({
-  name: "order",
+  name: "pedido",
   initialState,
   reducers: {
     setOrder: (state, action) => {
