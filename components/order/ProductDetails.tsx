@@ -11,7 +11,7 @@ const ProductDetails = ({ item }: ProductDetailsProps) => {
     <div className="shadow space-y-1 p-4 bg-white  border-t border-gray-200 ">
       <div className="space-y-4">
         <div className="flex justify-between items-start">
-          <p className="text-xl font-bold">{item.name} </p>
+          <p className="text-xl font-bold">{item.id} </p>
 
           <button type="button" onClick={() => {}}>
             <XCircleIcon className="text-red-600 h-8 w-8" />
