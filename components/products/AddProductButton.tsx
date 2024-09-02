@@ -1,5 +1,6 @@
 "use client";
 import { addOrder } from "@/src/store/slices/orderSlice";
+import { OrderItem } from "@/src/types";
 import { Product } from "@prisma/client";
 import { useDispatch } from "react-redux";
 
@@ -11,8 +12,17 @@ const AddProductButton = ({ product }: AddProductButtonProps) => {
   const dispatch = useDispatch();
 
   const addToOrder = () => {
-    dispatch(addOrder(product));
-    console.log(product);
+    const { id, name, price, ...data } = product;
+    const orderItem: OrderItem = {
+      id,
+      name,
+      price,
+      quantity: 1,
+      subtotal: price * 1,
+    };
+
+    dispatch(addOrder(orderItem));
+    console.log(orderItem);
   };
 
   return (
