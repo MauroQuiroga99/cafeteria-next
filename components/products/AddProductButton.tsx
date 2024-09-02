@@ -1,8 +1,9 @@
 "use client";
+import { getOrder } from "@/src/store/selectors/orders";
 import { addOrder } from "@/src/store/slices/orderSlice";
 import { OrderItem } from "@/src/types";
 import { Product } from "@prisma/client";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 type AddProductButtonProps = {
   product: Product;
@@ -10,19 +11,25 @@ type AddProductButtonProps = {
 
 const AddProductButton = ({ product }: AddProductButtonProps) => {
   const dispatch = useDispatch();
+  const orderItems = useSelector(getOrder);
 
   const addToOrder = () => {
-    const { id, name, price, ...data } = product;
-    const orderItem: OrderItem = {
+    const { id, name, price } = product;
+
+    // Encuentra el item existente en la orden
+    const existingItem = orderItems.find((item) => item.id === id);
+
+    // Crear nuevo ítem o actualizar el existente
+    const newOrderItem: OrderItem = {
       id,
       name,
       price,
-      quantity: 1,
-      subtotal: price * 1,
+      quantity: existingItem ? existingItem.quantity + 1 : 1,
+      subtotal: price * (existingItem ? existingItem.quantity + 1 : 1),
     };
 
-    dispatch(addOrder(orderItem));
-    console.log(orderItem);
+    dispatch(addOrder(newOrderItem));
+    console.log(product);
   };
 
   return (

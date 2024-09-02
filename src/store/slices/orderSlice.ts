@@ -17,7 +17,19 @@ const orderSlice = createSlice({
       state.order = action.payload;
     },
     addOrder: (state, action) => {
-      state.order.push(action.payload);
+      const newItem = action.payload;
+      const existingItem = state.order.find((item) => item.id === newItem.id);
+
+      if (existingItem) {
+        existingItem.quantity += 1;
+        existingItem.subtotal = existingItem.price * existingItem.quantity;
+      } else {
+        state.order.push({
+          ...newItem,
+          quantity: 1,
+          subtotal: newItem.price,
+        });
+      }
     },
   },
 });
