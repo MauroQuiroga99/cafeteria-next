@@ -1,6 +1,7 @@
 import ProductCart from "@/components/products/ProductCart";
 import { prisma } from "@/src/lib/prisma";
 
+//pasar función a una carpeta service
 async function getProducts(category: string) {
   const products = await prisma.product.findMany({
     where: {

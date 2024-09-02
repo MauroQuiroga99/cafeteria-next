@@ -1,6 +1,7 @@
-import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
+import ReduxProvider from "@/components/redux";
+import { Metadata } from "next";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -15,8 +16,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body className={`${inter.className} bg-gray-100`}>{children}</body>
-    </html>
+    <ReduxProvider>
+      <html lang="en">
+        <body className={`${inter.className} bg-gray-100`}>{children}</body>
+      </html>
+    </ReduxProvider>
   );
 }
