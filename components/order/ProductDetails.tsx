@@ -1,12 +1,20 @@
 import { XCircleIcon, PlusIcon, MinusIcon } from "@heroicons/react/24/outline";
 import { OrderItem } from "@/src/types";
 import { formatCurrency } from "@/src/utils";
+import { useDispatch } from "react-redux";
+import { incrementQuantity } from "@/src/store/slices/orderSlice";
 
 type ProductDetailsProps = {
   item: OrderItem;
 };
 
 const ProductDetails = ({ item }: ProductDetailsProps) => {
+  const dispatch = useDispatch();
+
+  const handleIncrement = () => {
+    dispatch(incrementQuantity(item.id));
+  };
+
   return (
     <div className="shadow space-y-1 p-4 bg-white  border-t border-gray-200 ">
       <div className="space-y-4">
@@ -27,7 +35,7 @@ const ProductDetails = ({ item }: ProductDetailsProps) => {
 
           <p className="text-lg font-black ">{item.quantity}</p>
 
-          <button type="button" onClick={() => {}}>
+          <button type="button" onClick={handleIncrement}>
             <PlusIcon className="h-6 w-6" />
           </button>
         </div>
