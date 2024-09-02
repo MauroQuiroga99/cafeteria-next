@@ -40,8 +40,27 @@ const orderSlice = createSlice({
         existingItem.subtotal = existingItem.price * existingItem.quantity;
       }
     },
+    decreaseQuantity: (state, action) => {
+      const id = action.payload;
+      const existingItem = state.order.find((item) => item.id === id);
+
+      if (existingItem && existingItem.quantity > 1) {
+        existingItem.quantity -= 1;
+        existingItem.subtotal = existingItem.price * existingItem.quantity;
+      }
+    },
+    removeItem: (state, action) => {
+      const id = action.payload;
+      state.order = state.order.filter((item) => item.id !== id);
+    },
   },
 });
 
-export const { setOrder, addOrder, incrementQuantity } = orderSlice.actions;
+export const {
+  setOrder,
+  addOrder,
+  incrementQuantity,
+  decreaseQuantity,
+  removeItem,
+} = orderSlice.actions;
 export default orderSlice.reducer;

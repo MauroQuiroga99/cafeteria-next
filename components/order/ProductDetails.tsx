@@ -2,7 +2,12 @@ import { XCircleIcon, PlusIcon, MinusIcon } from "@heroicons/react/24/outline";
 import { OrderItem } from "@/src/types";
 import { formatCurrency } from "@/src/utils";
 import { useDispatch } from "react-redux";
-import { incrementQuantity } from "@/src/store/slices/orderSlice";
+import {
+  decreaseQuantity,
+  incrementQuantity,
+  removeItem,
+} from "@/src/store/slices/orderSlice";
+import { useMemo } from "react";
 
 type ProductDetailsProps = {
   item: OrderItem;
@@ -15,13 +20,24 @@ const ProductDetails = ({ item }: ProductDetailsProps) => {
     dispatch(incrementQuantity(item.id));
   };
 
+  const handleDecrement = () => {
+    dispatch(decreaseQuantity(item.id));
+  };
+
+  const handleRemove = () => {
+    dispatch(removeItem(item.id));
+  };
+
+  const disableDecreaseButton = useMemo(() => item.quantity === 1, [item]);
+  const disableIncreaseButton = useMemo(() => item.quantity === 5, [item]);
+
   return (
     <div className="shadow space-y-1 p-4 bg-white  border-t border-gray-200 ">
       <div className="space-y-4">
         <div className="flex justify-between items-start">
           <p className="text-xl font-bold">{item.name} </p>
 
-          <button type="button" onClick={() => {}}>
+          <button type="button" onClick={handleRemove}>
             <XCircleIcon className="text-red-600 h-8 w-8" />
           </button>
         </div>
@@ -29,13 +45,23 @@ const ProductDetails = ({ item }: ProductDetailsProps) => {
           {formatCurrency(item.price)}
         </p>
         <div className="flex gap-5 px-10 py-2 bg-gray-100 w-fit rounded-lg">
-          <button type="button" onClick={() => {}}>
+          <button
+            type="button"
+            onClick={handleDecrement}
+            disabled={disableDecreaseButton}
+            className="disabled:opacity-20"
+          >
             <MinusIcon className="h-6 w-6" />
           </button>
 
           <p className="text-lg font-black ">{item.quantity}</p>
 
-          <button type="button" onClick={handleIncrement}>
+          <button
+            type="button"
+            onClick={handleIncrement}
+            disabled={disableIncreaseButton}
+            className="disabled:opacity-20"
+          >
             <PlusIcon className="h-6 w-6" />
           </button>
         </div>
