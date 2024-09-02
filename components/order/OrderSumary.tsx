@@ -1,6 +1,7 @@
 "use client";
 import { getOrder } from "@/src/store/selectors/orders";
 import { useSelector } from "react-redux";
+import ProductDetails from "./ProductDetails";
 
 const OrderSumary = () => {
   const order = useSelector(getOrder);
@@ -12,7 +13,9 @@ const OrderSumary = () => {
         <p className="text-center my-10 ">El carrito está vacío</p>
       ) : (
         <div className="mt-5 ">
-          <p>Hay Algo</p>
+          {order.map((item) => (
+            <ProductDetails key={item.id} item={item} />
+          ))}
         </div>
       )}
     </aside>
