@@ -13,8 +13,8 @@ const OrderSumary = () => {
     [order]
   );
 
-  const handleCreateOrder = () => {
-    console.log("desde handleCreateOrder");
+  const handleCreateOrder = (formData: FormData) => {
+    console.log(formData.get("name"));
   };
 
   return (
@@ -32,6 +32,12 @@ const OrderSumary = () => {
             <span className=" font-bold"> {formatCurrency(total)} </span>
           </p>
           <form className="w-full mt-10 space-y-5 " action={handleCreateOrder}>
+            <input
+              type="text"
+              placeholder="Tu Nombre"
+              className="bg-white border border-gray-100 p-2 w-full"
+              name="name"
+            />
             <input
               type="submit"
               className=" font-bold py-2 rounded uppercase text-white bg-black w-full text-center cursor-pointer"
