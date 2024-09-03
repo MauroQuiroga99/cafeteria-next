@@ -4,6 +4,8 @@ import { useSelector } from "react-redux";
 import ProductDetails from "./ProductDetails";
 import { useMemo } from "react";
 import { formatCurrency } from "@/src/utils";
+import { createOrder } from "@/actions/create-order-action";
+import { OrderSchema } from "@/src/schema";
 
 const OrderSumary = () => {
   const order = useSelector(getOrder);
@@ -14,7 +16,12 @@ const OrderSumary = () => {
   );
 
   const handleCreateOrder = (formData: FormData) => {
-    console.log(formData.get("name"));
+    const data = {
+      name: formData.get("name"),
+    };
+    const result = OrderSchema.safeParse(data);
+    console.log(result);
+    return;
   };
 
   return (
