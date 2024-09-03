@@ -6,6 +6,7 @@ import { useMemo } from "react";
 import { formatCurrency } from "@/src/utils";
 import { createOrder } from "@/actions/create-order-action";
 import { OrderSchema } from "@/src/schema";
+import { toast } from "react-toastify";
 
 const OrderSumary = () => {
   const order = useSelector(getOrder);
@@ -20,7 +21,11 @@ const OrderSumary = () => {
       name: formData.get("name"),
     };
     const result = OrderSchema.safeParse(data);
-    console.log(result);
+    if (!result.success) {
+      result.error.issues.forEach((issues) => {
+        toast.error(issues.message);
+      });
+    }
     return;
   };
 
