@@ -1,14 +1,16 @@
 "use client";
 import { getOrder } from "@/src/store/selectors/orders";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import ProductDetails from "./ProductDetails";
 import { useMemo } from "react";
 import { formatCurrency } from "@/src/utils";
 import { createOrder } from "@/actions/create-order-action";
 import { OrderSchema } from "@/src/schema";
 import { toast } from "react-toastify";
+import { clearOrder } from "@/src/store/slices/orderSlice";
 
 const OrderSumary = () => {
+  const dispatch = useDispatch();
   const order = useSelector(getOrder);
   //Total a pagar
   const total = useMemo(
@@ -19,20 +21,28 @@ const OrderSumary = () => {
   const handleCreateOrder = async (formData: FormData) => {
     const data = {
       name: formData.get("name"),
+      total,
+      order,
     };
+
     const result = OrderSchema.safeParse(data);
+    console.log(result);
     if (!result.success) {
       result.error.issues.forEach((issue) => {
         toast.error(issue.message);
       });
       return;
     }
+
     const response = await createOrder(data);
     if (response?.errors) {
       response.errors.forEach((issue) => {
         toast.error(issue.message);
       });
     }
+
+    toast.success("Pedido Realizado Correctamente");
+    dispatch(clearOrder());
   };
 
   return (

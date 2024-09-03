@@ -53,6 +53,9 @@ const orderSlice = createSlice({
       const id = action.payload;
       state.order = state.order.filter((item) => item.id !== id);
     },
+    clearOrder: (state) => {
+      state.order = [];
+    },
   },
 });
 
@@ -62,5 +65,6 @@ export const {
   incrementQuantity,
   decreaseQuantity,
   removeItem,
+  clearOrder,
 } = orderSlice.actions;
 export default orderSlice.reducer;
