@@ -1,7 +1,12 @@
+import Heading from "@/components/ui/Heading";
 import React from "react";
 
 const OrdersPage = () => {
-  return <div>Orders</div>;
+  return (
+    <>
+      <Heading> Administrar Ordenes </Heading>
+    </>
+  );
 };
 
 export default OrdersPage;
