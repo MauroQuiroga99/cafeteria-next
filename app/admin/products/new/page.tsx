@@ -1,12 +1,7 @@
-import Heading from "@/components/ui/Heading";
 import React from "react";
 
-const ProductsPage = () => {
-  return (
-    <>
-      <Heading> Administrar Productos</Heading>
-    </>
-  );
+const CreateProductPage = () => {
+  return <div className="text-2xl my-10 ">Crear Producto</div>;
 };
 
-export default ProductsPage;
+export default CreateProductPage;
