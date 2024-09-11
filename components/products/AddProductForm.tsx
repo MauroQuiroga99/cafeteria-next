@@ -1,13 +1,18 @@
 "use client";
+import { createProduct } from "@/actions/create-product-action";
 import { ProductSchema } from "@/src/schema";
+import { useRouter } from "next/navigation";
 import { toast } from "react-toastify";
 
 const AddProductForm = ({ children }: { children: React.ReactNode }) => {
+  const router = useRouter();
+
   const handleSubmit = async (FormData: FormData) => {
     const data = {
       name: FormData.get("name"),
       price: FormData.get("price"),
       categoryId: FormData.get("categoryId"),
+      image: FormData.get("image"),
     };
 
     const result = ProductSchema.safeParse(data);
@@ -17,6 +22,15 @@ const AddProductForm = ({ children }: { children: React.ReactNode }) => {
       });
       return;
     }
+    const response = await createProduct(result.data);
+    if (response?.errors) {
+      response.errors.forEach((issue) => {
+        toast.error(issue.message);
+      });
+      return;
+    }
+    toast.success("Producto creado correctamente");
+    router.push("/admin/products");
   };
 
   return (
