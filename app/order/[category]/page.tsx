@@ -20,7 +20,7 @@ const Orderpage = async ({ params }: { params: { category: string } }) => {
   return (
     <>
       <Heading>Elige y Personaliza tu pedido a continuación </Heading>
-      <div className="first:ml-4 first:mr-4 first:mt-4 first:mb-4 grid grid-cols-1 lg:grid-cols-2 2xl:grid-cols-3 gap-3 items-start ">
+      <div className="first:ml-4 first:mr-4 first:mt-4 first:mb-4 grid grid-cols-1 lg:grid-cols-3 2xl:grid-cols-4 gap-3 items-start ">
         {products.map((product) => (
           <ProductCart key={product.id} product={product} />
         ))}
