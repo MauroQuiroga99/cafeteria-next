@@ -1,5 +1,5 @@
 import ProductsTable from "@/components/products/ProductsTable";
-import ProductsPagination from "@/components/ui/ProductsPagination";
+import ProductsPagination from "@/components/products/ProductsPagination";
 import Heading from "@/components/ui/Heading";
 import { prisma } from "@/src/lib/prisma";
 import { redirect } from "next/navigation";
