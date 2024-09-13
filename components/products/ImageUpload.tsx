@@ -51,6 +51,7 @@ const ImageUpload = ({ image }: { image: string | undefined }) => {
             type="hidden"
             name="image"
             defaultValue={imageUrl ? imageUrl : image}
+            style={{ objectFit: "contain" }}
           />
         </>
       )}
