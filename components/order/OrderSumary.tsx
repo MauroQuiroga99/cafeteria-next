@@ -8,6 +8,7 @@ import { createOrder } from "@/actions/create-order-action";
 import { OrderSchema } from "@/src/schema";
 import { toast } from "react-toastify";
 import { clearOrder } from "@/src/store/slices/orderSlice";
+import Link from "next/link";
 
 const OrderSumary = () => {
   const dispatch = useDispatch();
@@ -74,6 +75,13 @@ const OrderSumary = () => {
           </form>
         </div>
       )}
+
+      <Link
+        href={"/orders"}
+        className=" mt-4 flex justify-center text-lg rounded-lg bg-amber-400 w-1 lg:w-auto px-5 py-2 text-center font-bold cursor-pointer"
+      >
+        Ver Pedidos Listos
+      </Link>
     </aside>
   );
 };
