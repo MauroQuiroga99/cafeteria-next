@@ -11,11 +11,11 @@ const OrdersPage = () => {
       .then((res) => res.json())
       .then((data) => data);
   const { data, error, isLoading } = useSWR<OrderWhitProducts[]>(url, fetcher, {
-    refreshInterval: 60000,
+    refreshInterval: 5000,
     revalidateOnFocus: false,
   });
 
-  if (isLoading) return "Cargando...";
+  if (isLoading) return <p>"Cargando..."</p>;
 
   if (data)
     return (
