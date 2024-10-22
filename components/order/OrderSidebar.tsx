@@ -1,3 +1,5 @@
+"use server";
+
 import { prisma } from "@/src/lib/prisma";
 import CategoryIcon from "../ui/CategoryIcon";
 import Logo from "../ui/Logo";
@@ -9,7 +11,6 @@ async function getCategories() {
 
 const OrderSidebar = async () => {
   const categories = await getCategories();
-  console.log(categories);
 
   return (
     <aside className="md:w-72 md:h-screen bg-white">
